@@ -5,9 +5,11 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const koaBody = require('koa-body')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const upload = require('./routes/upload')
 
 // error handler
 onerror(app)
@@ -32,9 +34,14 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+app.use(koaBody({
+  multipart: true
+}))
+
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(upload.routes(), upload.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

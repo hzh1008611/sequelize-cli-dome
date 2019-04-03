@@ -10,7 +10,8 @@ module.exports = class userController {
           sex: req.sex,
           email: req.email,
           age: req.age,
-          name: req.name
+          name: req.name,
+          avatar: req.avatar
         })
         ctx.body = {
           code: 200,
@@ -81,7 +82,8 @@ module.exports = class userController {
           name: req.name,
           sex: req.sex,
           email: req.email,
-          age: req.age
+          age: req.age,
+          avatar: req.avatar
         }, {
           where: {
             id: req.id
